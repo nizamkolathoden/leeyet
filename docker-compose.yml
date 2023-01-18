@@ -1,0 +1,16 @@
+version: '3'
+services:
+  node-app:
+    build: .
+    # ports:
+    #   - 8080:8080 
+    env_file:
+      - ./.env
+  nginx:
+    image: nginx
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+    depends_on:
+      - node-app
+    ports:
+      - "80:80"
